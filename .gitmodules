@@ -1,0 +1,3 @@
+[submodule "javarestassured"]
+	path = javarestassured
+	url = https://Igal_Kroif@bitbucket.org/restassuredjava/javarestassured.git

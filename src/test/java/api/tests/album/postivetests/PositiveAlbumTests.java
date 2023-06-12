@@ -67,5 +67,11 @@ public class PositiveAlbumTests {
         Assert.assertEquals(response.statusCode(), 200);
         response.then().log().status().and().log().body();
     }
-
+    //GETS latest releases with different markets (randomized)
+    @Test
+    public void getLatestReleasesTest() {
+        Response response = GetAlbumEndPointsTests.getLatestReleases();
+        Assert.assertEquals(response.statusCode(), 200);
+        response.then().log().body();
+    }
 }

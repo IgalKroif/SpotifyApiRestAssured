@@ -69,26 +69,16 @@ public class GetAlbumEndPointsTests {
                 .get(Routes.getSingleAlbum + "/" + albumId + "/tracks");
         return response;
     }
-    //NOT YET IMPLEMENTED : GET SAVED ALBUMS, SAVE ALBUM
-
-    public static Response testAddAlbumsToAccount() {
-        Authorization.extractTokenWithScope(Authorization.libraryScope);
+    //GET LATEST RELEASES
+    public static Response getLatestReleases() {
+        Authorization.extractToken();
         Response response =
-        RestAssured.given()
-                .header("Authorization", "Bearer " + Authorization.getTokenWithScope())
-                .contentType(ContentType.JSON)
-              //  .accept(ContentType.JSON)
-                //.queryParam("ids", "382ObEPsp2rxGrnsizN5TX%2C1A2GTWGtFfWp7KSQTwWOyo%2C2noRn2Aes5aoNVsU6iWThc")
-                .body("{\n" +
-                        "    \"ids\": [\n" +
-                        "        \"382ObEPsp2rxGrnsizN5TX%2C1A2GTWGtFfWp7KSQTwWOyo%2C2noRn2Aes5aoNVsU6iWThc\"\n" +
-                        "    ]\n" +
-                        "}")
-                .when()
-                .put(Routes.putAlbumsToAccount + "/");
-        return response;
+           given()
+              .header("Authorization", "Bearer " + Authorization.getToken())
+              .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
+           .when()
+                   .get(Routes.getLatestReleases);
 
-
-
+                return response;
     }
 }

@@ -1,11 +1,11 @@
-package api.endpoints;
+package api.endpoints.get.artistmethods;
 
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class ArtistEndPointsTests {
+public class GetArtistEndPointsTests {
 
 //    @Test (priority = 0, alwaysRun = true)
 //    public static Response extractToken() {

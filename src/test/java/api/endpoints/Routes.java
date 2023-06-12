@@ -22,13 +22,16 @@ public class Routes {
 
     //Artists Module
    public static String baseArtistUrl = "https://api.spotify.com/v1/artists/";
-    public static String baseAlbumUrl = "https://api.spotify.com/v1/albums";
 
-    public static String getArtists = baseArtistUrl + "{ArtistId}";
+
+   // public static String getArtists = baseArtistUrl + "{ArtistId}";
 
 
     //Albums Module
-   public static String getSingleAlbum = baseAlbumUrl; // + "{/AlbumId}";
+    public static String baseAlbumUrl = "https://api.spotify.com/v1/albums";
+   public static String getSingleAlbum = baseAlbumUrl;
+
+   public static String get
 
 
     //Playlists Module

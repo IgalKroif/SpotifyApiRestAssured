@@ -1,7 +1,9 @@
-package api.endpoints;
+package api.endpoints.get.albumsmethods;
 
+import api.endpoints.Routes;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import lombok.Data;
 import org.testng.annotations.Test;
 import api.endpoints.Authorization;
 
@@ -12,25 +14,23 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 
-public class AlbumEndPointsTests {
-    @Test
-    public void getAlbum() {
+public class GetAlbumEndPointsTests {
+    public static Response getAlbum() {
         Authorization.extractToken();
         String albumId = "1HimPrGurKic1hNOSidwF2";
         Response response = given()
                 .header("Authorization", "Bearer " + Authorization.getToken())
                 .when()
                 .get(Routes.getSingleAlbum + "/" + albumId);
-        response.then().log().all();
+        return response;
     }
 
-    public static Response getAlbumWithMarket() {
-        String market = "IL";
+    public static Response getAlbumWithMarket(String marketID) {
         Authorization.extractToken();
         String albumId = "1HimPrGurKic1hNOSidwF2";
         Response response = given()
                 .header("Authorization", "Bearer " + Authorization.getToken())
-                .queryParam("market", market)
+                .queryParam("market", marketID)
                 .when()
                 .get(Routes.getSingleAlbum + "/" + albumId);
         return response;
@@ -57,4 +57,6 @@ public class AlbumEndPointsTests {
                 .get(Routes.getSingleAlbum + "/");
         return response;
     }
+
+    //NOT YET IMPLEMENTED : GET TRACKS, GET SAVED ALBUMS, SAVE ALBUM
 }

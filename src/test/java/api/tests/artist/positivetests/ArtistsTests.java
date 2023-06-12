@@ -1,4 +1,4 @@
-package api.tests;
+package api.tests.artist.positivetests;
 
 public class ArtistsTests {
 }

@@ -23,8 +23,8 @@ public class AlbumEndPointsTests {
                 .get(Routes.getSingleAlbum + "/" + albumId);
         response.then().log().all();
     }
-    @Test
-    public void getAlbumWithMarket() {
+
+    public static Response getAlbumWithMarket() {
         String market = "IL";
         Authorization.extractToken();
         String albumId = "1HimPrGurKic1hNOSidwF2";
@@ -33,7 +33,7 @@ public class AlbumEndPointsTests {
                 .queryParam("market", market)
                 .when()
                 .get(Routes.getSingleAlbum + "/" + albumId);
-        response.then().log().all();
+        return response;
     }
 
     public static Response getSeveralAlbums() {

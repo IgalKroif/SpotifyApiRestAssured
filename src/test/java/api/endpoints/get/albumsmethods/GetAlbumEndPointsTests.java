@@ -1,21 +1,21 @@
 package api.endpoints.get.albumsmethods;
 
+import api.endpoints.Authorization;
 import api.endpoints.Routes;
 import api.tests.album.postivetests.PositiveAlbumTests;
 import api.utilities.ReusableMethods;
-import io.restassured.path.json.JsonPath;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import lombok.Data;
+import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import api.endpoints.Authorization;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GetAlbumEndPointsTests {
+    //gets an album
     public static Response getAlbum() {
         Authorization.extractToken();
         String albumId = "1HimPrGurKic1hNOSidwF2";
@@ -25,7 +25,7 @@ public class GetAlbumEndPointsTests {
                 .get(Routes.getSingleAlbum + "/" + albumId);
         return response;
     }
-
+    //requests an album with specified market.
     public static Response getAlbumWithMarket(String marketID) {
         Authorization.extractToken();
         String albumId = "1HimPrGurKic1hNOSidwF2";
@@ -36,7 +36,7 @@ public class GetAlbumEndPointsTests {
                 .get(Routes.getSingleAlbum + "/" + albumId);
         return response;
     }
-
+    //requests several albums from server
     public static Response getSeveralAlbums() {
         String[] fewAlbums = {"1HimPrGurKic1hNOSidwF2", "3qzrNVuUyOJxfzMYRCh5qN", "0UWT0SwOzXkR9IVbz0GNuo"};
         Authorization.extractToken();
@@ -58,7 +58,7 @@ public class GetAlbumEndPointsTests {
                 .get(Routes.getSingleAlbum + "/");
         return response;
     }
-    @Test
+    //Gets all tracks off of a specific album
     public static Response getAlbumTracks() {
        String albumId = "1HimPrGurKic1hNOSidwF2";
         Authorization.extractToken();
@@ -69,5 +69,26 @@ public class GetAlbumEndPointsTests {
                 .get(Routes.getSingleAlbum + "/" + albumId + "/tracks");
         return response;
     }
-    //NOT YET IMPLEMENTED : GET TRACKS, GET SAVED ALBUMS, SAVE ALBUM
+    //NOT YET IMPLEMENTED : GET SAVED ALBUMS, SAVE ALBUM
+
+    public static Response testAddAlbumsToAccount() {
+        Authorization.extractTokenWithScope(Authorization.libraryScope);
+        Response response =
+        RestAssured.given()
+                .header("Authorization", "Bearer " + Authorization.getTokenWithScope())
+                .contentType(ContentType.JSON)
+              //  .accept(ContentType.JSON)
+                //.queryParam("ids", "382ObEPsp2rxGrnsizN5TX%2C1A2GTWGtFfWp7KSQTwWOyo%2C2noRn2Aes5aoNVsU6iWThc")
+                .body("{\n" +
+                        "    \"ids\": [\n" +
+                        "        \"382ObEPsp2rxGrnsizN5TX%2C1A2GTWGtFfWp7KSQTwWOyo%2C2noRn2Aes5aoNVsU6iWThc\"\n" +
+                        "    ]\n" +
+                        "}")
+                .when()
+                .put(Routes.putAlbumsToAccount + "/");
+        return response;
+
+
+
+    }
 }

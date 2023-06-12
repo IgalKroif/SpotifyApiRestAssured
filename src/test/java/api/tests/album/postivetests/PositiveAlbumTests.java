@@ -29,7 +29,7 @@ public class PositiveAlbumTests {
 
 //get one album
     @Test
-    public void getAnAlbum() {
+    public void getAnAlbumTest() {
         Response response = GetAlbumEndPointsTests.getAlbum();
         response.then()
                 .assertThat().statusCode(200);
@@ -41,7 +41,7 @@ public class PositiveAlbumTests {
     }
     //get an album with market query param
     @Test
-    public void getAlbumWithMarket() {
+    public void getAlbumWithMarketTest() {
         String randomMarket = ReusableMethods.getRandomMarket(expectedMarkets);
         Response response = GetAlbumEndPointsTests.getAlbumWithMarket(randomMarket);
         response.then().assertThat().statusCode(200)
@@ -53,12 +53,19 @@ public class PositiveAlbumTests {
     }
     //get multiple albums
     @Test
-    public void testing() {
+    public void getMultipleAlbumsTest() {
         Response response = GetAlbumEndPointsTests.getSeveralAlbums();
         Assert.assertEquals(response.statusCode(), 200);
         response.then().log().body()
                 .log().status()
                 .log().headers();
+    }
+   //GETS tracks off of album.
+    @Test
+    public void getAlbumTracksTest() {
+        Response response = GetAlbumEndPointsTests.getAlbumTracks();
+        Assert.assertEquals(response.statusCode(), 200);
+        response.then().log().status().and().log().body();
     }
 
 }

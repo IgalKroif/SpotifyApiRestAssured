@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AlbumTests {
+public class PositiveAlbumTests {
 
     @Test
     public void testing() {

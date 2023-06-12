@@ -20,7 +20,7 @@ public class Routes {
 
 
     //Albums Module
-    public static String baseAlbumUrl = "https://api.spotify.com/v1/albums/";
+    public static String baseAlbumUrl = "https://api.spotify.com/v1/albums";
    public static String getSingleAlbum = baseAlbumUrl;
 
    public static String getLatestReleases = "https://api.spotify.com/v1/browse/new-releases";

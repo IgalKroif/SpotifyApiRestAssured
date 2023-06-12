@@ -27,7 +27,10 @@ public class Authorization {
         accessToken = jsonPath.getString("access_token");
         System.out.println(accessToken);
     }
-
+    @Test
+    public void extractTest() {
+        extractToken();
+    }
     public static String getToken() {
         return accessToken;
     }
@@ -50,6 +53,7 @@ public class Authorization {
         System.out.println(soutBody);
         System.out.println(accessTokenWithScope);
     }
+
     public static String getTokenWithScope() {
         return accessTokenWithScope;
     }

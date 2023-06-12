@@ -4,15 +4,10 @@ import api.endpoints.Authorization;
 import api.endpoints.Routes;
 import api.tests.album.postivetests.PositiveAlbumTests;
 import api.utilities.ReusableMethods;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.json.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GetAlbumEndPointsTests {
     //gets an album
@@ -26,6 +21,7 @@ public class GetAlbumEndPointsTests {
         return response;
     }
     //requests an album with specified market.
+
     public static Response getAlbumWithMarket(String marketID) {
         Authorization.extractToken();
         String albumId = "1HimPrGurKic1hNOSidwF2";

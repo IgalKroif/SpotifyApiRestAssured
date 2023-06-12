@@ -1,6 +1,6 @@
 package api.tests.album.postivetests;
 
-import api.endpoints.AlbumEndPointsTests;
+import api.endpoints.get.albumsmethods.GetAlbumEndPointsTests;
 import api.utilities.ReusableMethods;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -15,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PositiveAlbumTests {
     //list of market from response body of request
-    List<String> expectedMarkets = Arrays.asList("AD", "AE", "AG", "AL", "AM", "AO", "AR", "AT", "AU", "AZ", "BA", "BB",
+   public static List<String> expectedMarkets = Arrays.asList("AD", "AE", "AG", "AL", "AM", "AO", "AR", "AT", "AU", "AZ", "BA", "BB",
             "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BN", "BO", "BR", "BS", "BT", "BW", "BY", "BZ", "CA", "CD", "CG",
             "CH", "CI", "CL", "CM", "CO", "CR", "CV", "CW", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE",
             "EG", "ES", "ET", "FI", "FJ", "FM", "FR", "GA", "GB", "GD", "GE", "GH", "GM", "GN", "GQ", "GR", "GT", "GW",
@@ -30,7 +30,7 @@ public class PositiveAlbumTests {
 //get one album
     @Test
     public void getAnAlbum() {
-        Response response = AlbumEndPointsTests.getAlbum();
+        Response response = GetAlbumEndPointsTests.getAlbum();
         response.then()
                 .assertThat().statusCode(200);
         //Asserting that response list contains at list one of the markets available
@@ -43,7 +43,7 @@ public class PositiveAlbumTests {
     @Test
     public void getAlbumWithMarket() {
         String randomMarket = ReusableMethods.getRandomMarket(expectedMarkets);
-        Response response = AlbumEndPointsTests.getAlbumWithMarket(randomMarket);
+        Response response = GetAlbumEndPointsTests.getAlbumWithMarket(randomMarket);
         response.then().assertThat().statusCode(200)
                 .log().status().log().headers().log().cookies()
                 .log().body();
@@ -54,7 +54,7 @@ public class PositiveAlbumTests {
     //get multiple albums
     @Test
     public void testing() {
-        Response response = AlbumEndPointsTests.getSeveralAlbums();
+        Response response = GetAlbumEndPointsTests.getSeveralAlbums();
         Assert.assertEquals(response.statusCode(), 200);
         response.then().log().body()
                 .log().status()

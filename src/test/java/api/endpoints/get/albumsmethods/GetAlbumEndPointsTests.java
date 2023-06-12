@@ -1,6 +1,8 @@
 package api.endpoints.get.albumsmethods;
 
 import api.endpoints.Routes;
+import api.tests.album.postivetests.PositiveAlbumTests;
+import api.utilities.ReusableMethods;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lombok.Data;
@@ -11,8 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
+import static io.restassured.RestAssured.*;
 
 public class GetAlbumEndPointsTests {
     public static Response getAlbum() {
@@ -57,6 +58,16 @@ public class GetAlbumEndPointsTests {
                 .get(Routes.getSingleAlbum + "/");
         return response;
     }
-
+    @Test
+    public static Response getAlbumTracks() {
+       String albumId = "1HimPrGurKic1hNOSidwF2";
+        Authorization.extractToken();
+        Response response =
+        given().header("Authorization", "Bearer " + Authorization.getToken())
+                .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
+                .when()
+                .get(Routes.getSingleAlbum + "/" + albumId + "/tracks");
+        return response;
+    }
     //NOT YET IMPLEMENTED : GET TRACKS, GET SAVED ALBUMS, SAVE ALBUM
 }

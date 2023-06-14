@@ -32,6 +32,7 @@ public class GetAlbumEndPointsTests {
                 .get(Routes.getSingleAlbum + "/" + albumId);
         return response;
     }
+
     //requests several albums from server
     public static Response getSeveralAlbums() {
         String[] fewAlbums = {"1HimPrGurKic1hNOSidwF2", "3qzrNVuUyOJxfzMYRCh5qN", "0UWT0SwOzXkR9IVbz0GNuo"};
@@ -54,27 +55,60 @@ public class GetAlbumEndPointsTests {
                 .get(Routes.getSingleAlbum + "/");
         return response;
     }
+
     //Gets all tracks off of a specific album
     public static Response getAlbumTracks() {
-       String albumId = "1HimPrGurKic1hNOSidwF2";
+        String albumId = "1HimPrGurKic1hNOSidwF2";
         Authorization.extractToken();
         Response response =
-        given().header("Authorization", "Bearer " + Authorization.getToken())
-                .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
-                .when()
-                .get(Routes.getSingleAlbum + "/" + albumId + "/tracks");
+                given().header("Authorization", "Bearer " + Authorization.getToken())
+                        .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
+                        .when()
+                        .get(Routes.getSingleAlbum + "/" + albumId + "/tracks");
         return response;
     }
+
     //GET LATEST RELEASES
     public static Response getLatestReleases() {
         Authorization.extractToken();
         Response response =
-           given()
-              .header("Authorization", "Bearer " + Authorization.getToken())
-              .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
-           .when()
-                   .get(Routes.getLatestReleases);
+                given()
+                        .header("Authorization", "Bearer " + Authorization.getToken())
+                        .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
+                        .when()
+                        .get(Routes.getLatestReleases);
 
-                return response;
+        return response;
+    }
+
+    public static Response getNewReleasesWithLimitAndSkip(Integer limit, Integer skip) throws NullPointerException {
+        Authorization.extractToken();
+        if (limit == null || skip == null) {
+            Response response =
+
+                    given()
+                            .header("Authorization", "Bearer " + Authorization.getToken())
+                            .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
+                            .when()
+                            .get(Routes.getLatestReleases);
+
+            return response;
+
+        } else {
+            Response response =
+
+                    given()
+                            .header("Authorization", "Bearer " + Authorization.getToken())
+                            .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
+                            .queryParam("limit", limit)
+                            .queryParam("skip", skip)
+                            .when()
+                            .get(Routes.getLatestReleases);
+            return response;
+        }
+    }
+
+    public static Response getNewReleasesWithLimitAndSkip() {
+        return getNewReleasesWithLimitAndSkip(1, 0);
     }
 }

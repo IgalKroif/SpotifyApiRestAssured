@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static api.endpoints.get.albumsmethods.GetAlbumEndPointsTests.getNewReleasesWithLimitAndSkip;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PositiveAlbumTests {
@@ -73,5 +74,16 @@ public class PositiveAlbumTests {
         Response response = GetAlbumEndPointsTests.getLatestReleases();
         Assert.assertEquals(response.statusCode(), 200);
         response.then().log().body();
+    }
+    /*
+    /GETS latest releases with skip parameter and limit parameter
+    @param skip parameter: skips number of tracks shown to the user
+    @param limit parameter: limit number of tracks shown from overall response if 0 will return bad request
+    WILL RETURN LIMIT 1 if not parameter is specified for limit otherwise skip = 0;
+     */
+    @Test
+    public void getNewReleasesWithLimitAndSkipTest() {
+        Response response = getNewReleasesWithLimitAndSkip(0,1);
+        response.then().log().body().and().log().status();
     }
 }

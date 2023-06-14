@@ -1,11 +1,8 @@
-package api.endpoints;
-
-import io.restassured.response.Response;
-import org.testng.annotations.Test;
+package api.endpoints.get.playlistmethods;
 
 import static io.restassured.RestAssured.given;
 
-public class PlaylistEndPointsTests {
+public class GetPlaylistEndPointsTests {
 
 //    @Test (priority = 0, alwaysRun = true)
 //    public static Response extractToken() {

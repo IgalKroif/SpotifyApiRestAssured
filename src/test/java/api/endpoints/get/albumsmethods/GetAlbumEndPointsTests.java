@@ -4,8 +4,8 @@ import api.endpoints.Authorization;
 import api.endpoints.Routes;
 import api.tests.album.postivetests.PositiveAlbumTests;
 import api.utilities.ReusableMethods;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
@@ -83,6 +83,7 @@ public class GetAlbumEndPointsTests {
 
     public static Response getNewReleasesWithLimitAndSkip(Integer limit, Integer skip) throws NullPointerException {
         Authorization.extractToken();
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         if (limit == null || skip == null) {
             Response response =
 
@@ -96,7 +97,6 @@ public class GetAlbumEndPointsTests {
 
         } else {
             Response response =
-
                     given()
                             .header("Authorization", "Bearer " + Authorization.getToken())
                             .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
@@ -111,4 +111,5 @@ public class GetAlbumEndPointsTests {
     public static Response getNewReleasesWithLimitAndSkip() {
         return getNewReleasesWithLimitAndSkip(1, 0);
     }
+
 }

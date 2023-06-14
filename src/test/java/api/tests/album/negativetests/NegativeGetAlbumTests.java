@@ -1,7 +1,6 @@
 package api.tests.album.negativetests;
 
 import api.endpoints.put.albumsmethods.PutAlbumEndPointsTests;
-import api.tests.album.postivetests.PositiveAlbumTests;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -9,7 +8,7 @@ import org.testng.annotations.Test;
 import static api.endpoints.get.albumsmethods.GetAlbumEndPointsTests.getNewReleasesWithLimitAndSkip;
 import static org.hamcrest.Matchers.*;
 
-public class NegativeAlbumTests {
+public class NegativeGetAlbumTests {
     @Test
     public void AssertErrorCodeTest() {
         Response response = PutAlbumEndPointsTests.testAddAlbumsToAccount();

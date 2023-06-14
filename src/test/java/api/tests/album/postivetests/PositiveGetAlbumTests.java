@@ -1,7 +1,7 @@
 package api.tests.album.postivetests;
 
 import api.endpoints.get.albumsmethods.GetAlbumEndPointsTests;
-import api.tests.album.negativetests.NegativeAlbumTests;
+import api.tests.album.negativetests.NegativeGetAlbumTests;
 import api.utilities.ReusableMethods;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import static api.endpoints.get.albumsmethods.GetAlbumEndPointsTests.getNewReleasesWithLimitAndSkip;
 
-public class PositiveAlbumTests {
+public class PositiveGetAlbumTests {
     //list of market from response body of request
     public static List<String> expectedMarkets = Arrays.asList("AD", "AE", "AG", "AL", "AM", "AO", "AR", "AT", "AU", "AZ", "BA", "BB",
             "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BN", "BO", "BR", "BS", "BT", "BW", "BY", "BZ", "CA", "CD", "CG",
@@ -34,13 +34,13 @@ public class PositiveAlbumTests {
         Response response = GetAlbumEndPointsTests.getAlbum();
         response.then()
                 .assertThat().statusCode(200);
+
         //Asserting that response list contains at list one of the markets available
         JsonPath js = response.jsonPath();
         List<String> actualMarkets = js.getList("available_markets");
         boolean containsAnyMarket = !Collections.disjoint(actualMarkets, expectedMarkets);
         Assert.assertTrue(containsAnyMarket);
     }
-
     //get an album with market query param
     @Test
     public void getAlbumWithMarketTest() {
@@ -53,7 +53,6 @@ public class PositiveAlbumTests {
         String tracksHref = js.getString("tracks.href");
         Assert.assertTrue(tracksHref.contains(randomMarket));
     }
-
     //get multiple albums
     @Test
     public void getMultipleAlbumsTest() {
@@ -63,7 +62,6 @@ public class PositiveAlbumTests {
                 .log().status()
                 .log().headers();
     }
-
     //GETS tracks off of album.
     @Test
     public void getAlbumTracksTest() {
@@ -71,7 +69,6 @@ public class PositiveAlbumTests {
         Assert.assertEquals(response.statusCode(), 200);
         response.then().log().status().and().log().body();
     }
-
     //GETS latest releases with different markets (randomized)
     @Test
     public void getLatestReleasesTest() {
@@ -79,7 +76,6 @@ public class PositiveAlbumTests {
         Assert.assertEquals(response.statusCode(), 200);
         response.then().log().body();
     }
-
     /*
     /GETS latest releases with skip parameter and limit parameter
     @param skip parameter: skips number of tracks shown to the user
@@ -94,10 +90,10 @@ public class PositiveAlbumTests {
         if (response.statusCode() == 200) {
             response.then().assertThat().statusCode(200);
         } else {
-            NegativeAlbumTests.getNewReleasesWithLimitAndSkipNegativeTest();
+            NegativeGetAlbumTests.getNewReleasesWithLimitAndSkipNegativeTest();
         }
     }
-        //LATEST RELEASEs WITH RANDOM LIMIT AND SKIP
+        //LATEST RELEASES WITH RANDOM LIMIT AND SKIP
         @Test
         public static void getNewReleasesWithLimitAndSkipWithRandomLimitTest () {
             int limit = ReusableMethods.generateRandomNumber();
@@ -106,13 +102,15 @@ public class PositiveAlbumTests {
             if (response.statusCode() == 200) {
                 response.then().log().body().and().log().status();
                 response.then().assertThat().statusCode(200);
+
                 JsonPath jsonPath = response.jsonPath();
                 int albumsLimit = jsonPath.get("albums.limit");
                 Assert.assertEquals(albumsLimit,limit);
                 System.out.println("Albums Limit: " + albumsLimit);
+
             } else {
                 //RUNS NEGATIVE TEST CASE IF STATUS NOT 200!
-                NegativeAlbumTests.getNewReleasesWithLimitAndSkipNegativeTest();
+                NegativeGetAlbumTests.getNewReleasesWithLimitAndSkipNegativeTest();
                 System.out.println("Generated Invalid Limit over {50} Response Body: " + limit);
             }
         }

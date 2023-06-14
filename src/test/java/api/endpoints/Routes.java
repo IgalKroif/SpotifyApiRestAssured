@@ -7,16 +7,22 @@ package api.endpoints;
 
 public class Routes {
     //URL endpoints for SpotifyAPI requests
+    static int version = 1;
+    protected static final String apiVersion = "/v"+version+"/";
+    protected static final String baseURL = "https://api.spotify.com" + apiVersion;
     protected static final String clientId = "21df2fd397254479b1ff5d2429c5ba95";
     protected static final String clientSecret = "99e298b2bc424a9d8d5cf0043007cd6c";
 
     protected static String accessTokenUrl = "https://accounts.spotify.com/api/token";
 
     //Artists Module
-   public static String baseArtistUrl = "https://api.spotify.com/v1/artists/";
+    //URL TO GET an artist
+   public static String baseGetSingleArtistUrl = baseURL + "artists/" + "{id}";
+    //URL TO GET several artists!
+    public static String baseMultipleArtistUrl = baseURL + "artists";
 
-
-   // public static String getArtists = baseArtistUrl + "{ArtistId}";
+    //URL TO GET an artists album : /artists/{id}/albums Where id is the artists ID!
+    public static String baseArtistsAlbumsURL = baseURL + "albums";
 
 
     //Albums Module

@@ -2,7 +2,7 @@ package api.endpoints.get.albumsmethods;
 
 import api.endpoints.Authorization;
 import api.endpoints.Routes;
-import api.tests.album.postivetests.PositiveAlbumTests;
+import api.tests.album.postivetests.PositiveGetAlbumTests;
 import api.utilities.ReusableMethods;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -62,7 +62,7 @@ public class GetAlbumEndPointsTests {
         Authorization.extractToken();
         Response response =
                 given().header("Authorization", "Bearer " + Authorization.getToken())
-                        .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
+                        .queryParam("market", ReusableMethods.getRandomMarket(PositiveGetAlbumTests.expectedMarkets))
                         .when()
                         .get(Routes.getSingleAlbum + "/" + albumId + "/tracks");
         return response;
@@ -74,7 +74,7 @@ public class GetAlbumEndPointsTests {
         Response response =
                 given()
                         .header("Authorization", "Bearer " + Authorization.getToken())
-                        .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
+                        .queryParam("market", ReusableMethods.getRandomMarket(PositiveGetAlbumTests.expectedMarkets))
                         .when()
                         .get(Routes.getLatestReleases);
 
@@ -89,7 +89,7 @@ public class GetAlbumEndPointsTests {
 
                     given()
                             .header("Authorization", "Bearer " + Authorization.getToken())
-                            .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
+                            .queryParam("market", ReusableMethods.getRandomMarket(PositiveGetAlbumTests.expectedMarkets))
                             .when()
                             .get(Routes.getLatestReleases);
 
@@ -99,7 +99,7 @@ public class GetAlbumEndPointsTests {
             Response response =
                     given()
                             .header("Authorization", "Bearer " + Authorization.getToken())
-                            .queryParam("market", ReusableMethods.getRandomMarket(PositiveAlbumTests.expectedMarkets))
+                            .queryParam("market", ReusableMethods.getRandomMarket(PositiveGetAlbumTests.expectedMarkets))
                             .queryParam("limit", limit)
                             .queryParam("skip", skip)
                             .when()

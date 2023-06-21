@@ -11,4 +11,5 @@ C:\Users\igalk\IdeaProjects\spotifyapiautomation\src\test\java\api\endpoints\put
 C:\Users\igalk\IdeaProjects\spotifyapiautomation\src\test\java\api\utilities\ReusableMethods.java
 C:\Users\igalk\IdeaProjects\spotifyapiautomation\src\test\java\api\payload\Playlists.java
 C:\Users\igalk\IdeaProjects\spotifyapiautomation\src\test\java\api\endpoints\Authorization.java
+C:\Users\igalk\IdeaProjects\spotifyapiautomation\src\test\java\api\extentreports\ExtentTestNGListener.java
 C:\Users\igalk\IdeaProjects\spotifyapiautomation\src\test\java\api\tests\artist\positivetests\PositiveGetArtistsTests.java

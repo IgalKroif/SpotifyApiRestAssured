@@ -11,4 +11,8 @@
             <class name="api.tests.artist.positivetests.PositiveGetArtistsTests" />
         </classes>
     </test>
+
+    <listeners>
+        <listener class-name="api.extentreports.ExtentTestNGListener" />
+    </listeners>
 </suite>

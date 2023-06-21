@@ -1,6 +1,10 @@
 package api.endpoints;
 
+import io.restassured.RestAssured;
+import io.restassured.filter.Filter;
+import io.restassured.filter.session.SessionFilter;
 import io.restassured.path.json.JsonPath;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
@@ -52,6 +56,20 @@ public class Authorization {
        String soutBody = jsonPath.getString("scope");
         System.out.println(soutBody);
         System.out.println(accessTokenWithScope);
+    }
+    @BeforeTest
+    public static SessionFilter extractTokenSession() {
+        SessionFilter sessionFilter = new SessionFilter();
+        RestAssured.given()
+                .contentType("application/x-www-form-urlencoded")
+                .formParam("grant_type", "client_credentials")
+                .formParam("client_id", Routes.clientId)
+                .formParam("client_secret", Routes.clientSecret)
+                .filter(sessionFilter)
+                .when().post(Routes.accessTokenUrl)
+                .then()
+                .statusCode(200);
+        return sessionFilter;
     }
 
     public static String getTokenWithScope() {

@@ -81,9 +81,11 @@ public class PositiveGetArtistsTests {
                         return;
                     }
                 }
+            default:
+            case 401:
+                System.out.println("No Authorization found");
+                response.then().log().status().and().log();
                 break;
-
-
         }
     }
         @Test

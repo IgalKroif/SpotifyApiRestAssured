@@ -1,0 +1,14 @@
+api\payload\Playlists.class
+api\tests\album\postivetests\PositiveGetAlbumTests.class
+api\endpoints\Authorization.class
+api\utilities\ReusableMethods.class
+api\endpoints\get\albumsmethods\GetAlbumEndPointsTests.class
+api\endpoints\get\artistmethods\GetArtistEndPointsTests.class
+api\endpoints\get\playlistmethods\GetPlaylistEndPointsTests.class
+api\endpoints\Routes.class
+api\payload\ArtistData.class
+api\endpoints\put\albumsmethods\PutAlbumEndPointsTests.class
+api\tests\artist\negativetests\NegativeGetArtistsTests.class
+api\payload\AlbumData.class
+api\tests\artist\positivetests\PositiveGetArtistsTests.class
+api\tests\album\negativetests\NegativeGetAlbumTests.class

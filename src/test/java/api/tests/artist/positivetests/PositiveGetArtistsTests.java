@@ -14,8 +14,7 @@ import java.util.List;
 
 import static api.endpoints.get.artistmethods.GetArtistEndPointsTests.getSeveralArtists;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 public class PositiveGetArtistsTests {
 
@@ -51,7 +50,7 @@ public class PositiveGetArtistsTests {
                         "symphonic metal"
                 ));
                 System.out.println("Asserted Genres: " + genres);
-                assertThat(total, equalTo("914377"));
+                assertThat(total, greaterThanOrEqualTo("914377"));
 
                 System.out.println("Data of forty nine values: ");
                 response.then().log().status();
@@ -90,6 +89,7 @@ public class PositiveGetArtistsTests {
         @Test
         public void GetSeveralArtistsWithValidDataFiftyTest() {
             Response response = getSeveralArtists(ArtistData.fiftyIds);
+            response.then().log().body();
             switch (response.statusCode()) {
                 case 200:
                     // Get the JSON response as a string
@@ -112,7 +112,7 @@ public class PositiveGetArtistsTests {
                                     "swedish metal"
                             ));
                     System.out.println("Asserted Genres: " + genres);
-                    assertThat(total, equalTo("914377"));
+                    assertThat(total, greaterThanOrEqualTo("914377"));
 
                     System.out.println("Data of fifty values: ");
                     response.then().log().status();

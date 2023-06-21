@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Positive Tests">
+    <test name="Album Module">
+        <classes>
+            <class name="api.tests.album.postivetests.PositiveGetAlbumTests" />
+        </classes>
+    </test>
+
+    <test name="Artist Module">
+        <classes>
+            <class name="api.tests.artist.positivetests.PositiveGetArtistsTests" />
+        </classes>
+    </test>
+</suite>

@@ -77,6 +77,7 @@ public class NegativeGetAlbumTests {
             default:
                 if (response.statusCode() > 500 || response.statusCode() < 400) {
                     response.then().log().status().and().log().body();
+                    System.out.println("Status Code was: " + response.statusCode());
                 }
 
         }

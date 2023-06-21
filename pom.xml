@@ -7,13 +7,6 @@
     <groupId>api.automationframework</groupId>
     <artifactId>spotifyapiautomation</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -101,6 +94,47 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.2</version>
         </dependency>
+
+
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>run-tests</id>
+                        <phase>test</phase> <!-- Change phase to 'test' instead of 'clean' -->
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <testSourceDirectory>src/test/java</testSourceDirectory> <!-- Specify the test source directory -->
+                            <suiteXmlFiles>
+                                <suiteXmlFile>testng.xml</suiteXmlFile>
+                                <!-- Add more suite XML files as needed -->
+                            </suiteXmlFiles>
+                            <properties>
+                                <property>
+                                    <name>usedefaultlisteners</name>
+                                    <value>true</value>
+                                </property>
+                            </properties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    </properties>
+
 
 </project>

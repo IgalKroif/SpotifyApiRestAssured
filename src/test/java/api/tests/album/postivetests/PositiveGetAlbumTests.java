@@ -90,7 +90,9 @@ public class PositiveGetAlbumTests {
         if (response.statusCode() == 200) {
             response.then().assertThat().statusCode(200);
         } else {
+            System.out.println("STATUS CODE WAS NOT 200, actual status code was: " + response.then().log().status());
             NegativeGetAlbumTests.getNewReleasesWithLimitAndSkipNegativeTest();
+
         }
     }
         //LATEST RELEASES WITH RANDOM LIMIT AND SKIP
@@ -110,6 +112,7 @@ public class PositiveGetAlbumTests {
 
             } else {
                 //RUNS NEGATIVE TEST CASE IF STATUS NOT 200!
+                System.out.println("STATUS CODE WAS NOT 200, actual status code was: " + response.then().log().status());
                 NegativeGetAlbumTests.getNewReleasesWithLimitAndSkipNegativeTest();
                 System.out.println("Generated Invalid Limit over {50} Response Body: " + limit);
             }

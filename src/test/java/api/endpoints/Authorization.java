@@ -58,8 +58,9 @@ public class Authorization {
         System.out.println(accessTokenWithScope);
     }
     @BeforeTest
-    public static SessionFilter extractTokenSession() {
+    public static Filter extractTokenSession() {
         SessionFilter sessionFilter = new SessionFilter();
+        String session =
         RestAssured.given()
                 .contentType("application/x-www-form-urlencoded")
                 .formParam("grant_type", "client_credentials")
@@ -68,8 +69,18 @@ public class Authorization {
                 .filter(sessionFilter)
                 .when().post(Routes.accessTokenUrl)
                 .then()
-                .statusCode(200);
+                .extract().response().asString();
+        JsonPath js = new JsonPath(session);
+        String sessionTokenId = js.getString("access_token");
+        System.out.println(js.getString("access_token"));
+        System.out.println(session);
+        System.out.println(sessionFilter.getSessionId());
+
         return sessionFilter;
+    }
+    @Test
+    public void session() {
+        extractTokenSession();
     }
 
     public static String getTokenWithScope() {
